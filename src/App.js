@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import Gallery from './components/gallery'
 import Search from './components/search'
+import './App.css'
 
 function App(){
-    let [search, setSearch] = useState('Slipknot')
+    let [search, setSearch] = useState('')
     let [message, setMessage] = useState('Search for Music!')
     let [data, setData] = useState([])
 
@@ -24,7 +25,7 @@ function App(){
   useEffect(() => console.log(data), [data])
 
     return (
-        <div>
+        <div className='App'>
             <Search setSearch={setSearch}/>
             {message}
             <Gallery data={data} />
