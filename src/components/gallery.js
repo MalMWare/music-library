@@ -1,9 +1,14 @@
 import GalleryItem from './galleryItem'
 
 function Gallery(props){
+
     return (
         <div>
-            <GalleryItem data={props.data} />
+            {
+                props.data.map((item, index) => {
+                    return <GalleryItem key={index} data={item} />
+                })
+            }
         </div>
     )
 }
