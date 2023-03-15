@@ -6,7 +6,7 @@ function Gallery(props){
         <div>
             {
                 props.data.map((item, index) => {
-                    return <GalleryItem key={index} data={item} />
+                    return <GalleryItem key={index} item={item} />
                 })
             }
         </div>
