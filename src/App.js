@@ -31,11 +31,20 @@ function App(){
 
     return (
         <div className='App'>
-            <Search setSearch={setSearch}/>
             {message}
-            <Gallery data={data} />
-            <AlbumView />
-            <ArtistView />
+            <Router>
+                <Routes>
+                    <Route path="/" element={
+                        <>
+                            <Search setSearch={setSearch}/>
+                            <Gallery data={data} />
+                        </>
+                    }  />
+                    <Route path="/album/:id" element={<AlbumView />} />
+                    <Route path="/artist/:id" element={<ArtistView />} />
+                </Routes>
+            </Router>
+            
         </div>
     )
 }
