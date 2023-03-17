@@ -27,8 +27,6 @@ function App(){
       fetchData()
   }, [search])
 
-  useEffect(() => console.log(data), [data])
-
     return (
         <div className='App'>
             {message}
