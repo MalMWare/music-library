@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' 
 import Gallery from './components/gallery'
 import Search from './components/search'
 import './App.css'
+import AlbumView from './components/AlbumView'
+import ArtistView from './components/ArtistView'
 
 function App(){
     let [search, setSearch] = useState('')
@@ -31,6 +34,8 @@ function App(){
             <Search setSearch={setSearch}/>
             {message}
             <Gallery data={data} />
+            <AlbumView />
+            <ArtistView />
         </div>
     )
 }
