@@ -1,36 +1,39 @@
-import { useEffect, useState } from 'react'
+import { useState, useRef } from 'react'
 import Gallery from './components/gallery'
 import Search from './components/search'
+import { DataContext } from './context/DataContext'
 import './App.css'
+import { SearchContext } from './context/SearchContext'
 
 function App(){
-    let [search, setSearch] = useState('')
     let [message, setMessage] = useState('Search for Music!')
     let [data, setData] = useState([])
+    let searchInput = useRef('')
 
-    useEffect(() => {
-      const fetchData = async () => {
-          if (search) {
-            document.title = `${search} Music`
-          const response = await fetch(`https://itunes.apple.com/search?term=${search}`)
-          const resData = await response.json()
-          if (resData.results.length > 0) {
-              setData(resData.results)
-          } else {
-              setMessage('Not Found')
-          }
-          }
-      }
-      fetchData()
-  }, [search])
-
-  useEffect(() => console.log(data), [data])
+async function handleSearch(e, term) {
+    e.preventDefault()
+    document.title = `${term} Music`
+    const response = await fetch(`https://itunes.apple.com/search?term=${term}`)
+    const resData = await response.json()
+    if (resData.results.length > 0) {
+        setData(resData.results)
+    } else {
+        setMessage('Not Found')
+    }
+}
 
     return (
         <div className='App'>
-            <Search setSearch={setSearch}/>
+            <SearchContext.Provider value={{
+                term: searchInput,
+                setSearch: handleSearch
+            }}>
+            <Search />
+            </SearchContext.Provider>
             {message}
-            <Gallery data={data} />
+            <DataContext.Provider value={data} >
+                <Gallery />
+            </DataContext.Provider>
         </div>
     )
 }

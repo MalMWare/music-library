@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function GalleryItem(props){
+function GalleryItem(props) {
     let [view, setView] = useState(false)
 
     const simpleStyle = {
@@ -15,7 +15,7 @@ function GalleryItem(props){
         //'height': '20vh',
         'border': '1px solid black',
         'margin': '2px',
-        'backgroundImage': `url(${props.item?.artworkUrl100})`,
+        'backgroundImage': `url(${props.item.artworkUrl100})`,
         'backgroundRepeat': 'no-repeat',
         'backgroundSize': 'cover',
         'color': 'yellow'
@@ -50,5 +50,7 @@ function GalleryItem(props){
 
         </div>
     )
+
 }
 export default GalleryItem
+
