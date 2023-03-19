@@ -1,8 +1,11 @@
-import { useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' 
 import Gallery from './components/gallery'
 import Search from './components/search'
 import { DataContext } from './context/DataContext'
 import './App.css'
+import AlbumView from './components/AlbumView'
+import ArtistView from './components/ArtistView'
 import { SearchContext } from './context/SearchContext'
 
 function App(){
@@ -24,16 +27,27 @@ async function handleSearch(e, term) {
 
     return (
         <div className='App'>
-            <SearchContext.Provider value={{
-                term: searchInput,
-                setSearch: handleSearch
-            }}>
-            <Search />
-            </SearchContext.Provider>
             {message}
-            <DataContext.Provider value={data} >
-                <Gallery />
-            </DataContext.Provider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={
+                        <>
+                            <SearchContext.Provider value={{
+                                term: searchInput,
+                                setSearch: handleSearch
+                            }}>
+                            <Search />
+                            </SearchContext.Provider>
+                            <DataContext.Provider value={data} >
+                             <Gallery />
+                            </DataContext.Provider>
+                        </>
+                    }  />
+                    <Route path="/album/:id" element={<AlbumView />} />
+                    <Route path="/artist/:id" element={<ArtistView />} />
+                </Routes>
+            </Router>
+            
         </div>
     )
 }
